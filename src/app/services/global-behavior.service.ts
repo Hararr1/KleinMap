@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Menu } from '../enums/Menu';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -7,10 +8,29 @@ import { Menu } from '../enums/Menu';
 
 export class GlobalBehaviorService {
 
-  public SelectedMenu: Menu = Menu.Map;
-  constructor() { }
+  constructor(private router: Router) { }
 
   public ChangeSelectedMenu(menu: Menu) {
-    this.SelectedMenu = menu;
+
+    switch (menu) {
+      
+      case Menu.Alarm:
+        this.router.navigate(['/alarm']);
+        break;
+      
+      case Menu.Analytics:
+        this.router.navigate(['/analytics']);
+        break;
+      
+      case Menu.Map:
+        this.router.navigate(['/map']);
+        break;
+      
+      case Menu.Settings:
+        this.router.navigate(['/settings']);
+          break;
+
+    }
+
   }
 }

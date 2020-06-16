@@ -5,10 +5,7 @@
   </div>
 
   <div class="bodyContainer">
-    <app-alarm *ngIf="GlobalBehaviorService.SelectedMenu === Menu.Alarm"></app-alarm>
-    <app-analytics  *ngIf="GlobalBehaviorService.SelectedMenu === Menu.Analytics"></app-analytics>
-    <app-map *ngIf="GlobalBehaviorService.SelectedMenu === Menu.Map"></app-map>
-    <app-settings *ngIf="GlobalBehaviorService.SelectedMenu === Menu.Settings"></app-settings>  
+    <router-outlet></router-outlet>
   </div>
 
   <div class="footerContainer">
