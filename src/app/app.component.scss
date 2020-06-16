@@ -1,0 +1,51 @@
+@import "./styles/colors.scss";
+
+.mainContainer {
+   display: grid;
+   height: 100vh;
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box; 
+   grid-template-rows: repeat(12, 1fr);
+   grid-template-columns: repeat(12, 1fr);
+   background: linear-gradient(113deg, rgb(17, 21, 17) 0%, rgb(54, 69, 74) 47%, rgb(119, 119, 119) 99%);
+   color: $fontColor;
+}
+
+.headerContainer {
+    grid-row: 1/1;
+    grid-column: 2/12;
+    margin: 15px 15px 2px 15px;
+}
+ 
+.bodyContainer {
+    grid-row: 2/12;
+    grid-column: 2/12;
+    margin: 0px 0px 2px 0px;
+    background-color: $contentBackgroundColor;
+}
+
+.footerContainer {
+    grid-row: 12/13;
+    grid-column: 2/12;
+    background-color: $primaryButton;
+}
+
+@media screen and (min-width: 801px) {
+
+    .headerContainer {
+        grid-column: 2/13;
+    }
+     
+    .bodyContainer {
+        grid-column: 2/11;
+        margin: 0 2px 0 0;
+    }
+    
+    .footerContainer {
+        grid-row: 2/12;
+        grid-column: 11/12;
+    }
+}
+
+

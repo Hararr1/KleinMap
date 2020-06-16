@@ -1,0 +1,17 @@
+<div class="mainContainer">
+
+  <div class="headerContainer">
+    <app-header></app-header>
+  </div>
+
+  <div class="bodyContainer">
+    <app-alarm *ngIf="GlobalBehaviorService.SelectedMenu === Menu.Alarm"></app-alarm>
+    <app-analytics  *ngIf="GlobalBehaviorService.SelectedMenu === Menu.Analytics"></app-analytics>
+    <app-map *ngIf="GlobalBehaviorService.SelectedMenu === Menu.Map"></app-map>
+    <app-settings *ngIf="GlobalBehaviorService.SelectedMenu === Menu.Settings"></app-settings>  
+  </div>
+
+  <div class="footerContainer">
+    <app-footer></app-footer>
+  </div>
+</div>

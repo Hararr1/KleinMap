@@ -1,0 +1,77 @@
+.container {
+    margin: 0 auto;
+}
+
+.alarm {
+    background: url("../../assets/alarm.webp");
+    background-size: 32px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.analytics {
+    background: url("../../assets/analytics.webp");
+    background-size: 32px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.map {
+    background: url("../../assets/map.webp");
+    background-size: 32px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.settings{
+    background: url("../../assets/settings.webp");
+    background-size: 32px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+button {
+    height: 8vh;
+    border: none;
+    outline: none;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #4c4c4c61;
+}
+
+@media only screen and (max-width: 800px)
+{
+    button {
+        width: 12.5vw;
+        margin-bottom: 2px;
+        margin-right: 18px;
+        display: inline-block;
+    }
+
+    .alarm {
+        margin-left: 20;
+    }
+
+    .container {
+        display: table;
+    }
+
+    .settings {
+        margin-right: 0px;
+    }
+}
+
+@media only screen and (min-width: 801px)
+{
+   button {
+        width: 8.32vw;
+        margin: 0 auto;
+        display: block;
+   }
+
+   .alarm {
+       margin-left: 0;
+   }
+}
