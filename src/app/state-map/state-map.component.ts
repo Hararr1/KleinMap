@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { GeoDataService } from '../services/geo-data.service';
+import { ActivatedRoute } from '@angular/router';
+import { HttpService } from '../services/http.service';
+import { IStation } from '../models/IStation';
 
 @Component({
   selector: 'app-state-map',
@@ -8,16 +11,17 @@ import { GeoDataService } from '../services/geo-data.service';
   styleUrls: ['./state-map.component.scss']
 })
 export class StateMapComponent implements OnInit {
-  
-  constructor(public geoDataService: GeoDataService) { }
+
+  private map;
+  constructor(public geoDataService: GeoDataService, private route: ActivatedRoute, private httpService: HttpService) { }
 
   ngOnInit() {
 
-	let map;
-	let geojson;
+    const id = +this.route.snapshot.paramMap.get('id');
+    let geojson;
 	
-// --------- INIT MAP --------- //
-		 map = L.map(
+    // --------- INIT MAP --------- //
+		this.map = L.map(
             'mapid', 
             {
             center: [52.431563, 18.565166],
@@ -27,25 +31,42 @@ export class StateMapComponent implements OnInit {
           }
         );
 
-// --------- EVENT ON HOVER --------- //
-	// 	function OnHover(e) {
-	// 		const layer = e.target;
+      // --------- EVENT ON HOVER --------- //
+      // 	function OnHover(e) {
+      // 		const layer = e.target;
 
-	// 		layer.setStyle({
-	// 			weight: 5,
-	// 			color: "#3388ff",
-	// 			dashArray: "",
-	// 			fillOpacity: 0.7
-	// 		});
+      // 		layer.setStyle({
+      // 			weight: 5,
+      // 			color: "#3388ff",
+      // 			dashArray: "",
+      // 			fillOpacity: 0.7
+      // 		});
 
-	// 		if (!L.Browser.ie && !L.Browser.edge) {
-	// 			layer.bringToFront();
-	// 		}
-	// }
+      // 		if (!L.Browser.ie && !L.Browser.edge) {
+      // 			layer.bringToFront();
+      // 		}
+      // }
     
-// --------- GEOJSON --------- //
-    geojson = L.geoJSON(this.geoDataService.SelectedState).addTo(map);
-    map.fitBounds(geojson.getBounds());
+    // --------- GEOJSON --------- //
+    if (!this.geoDataService.SelectedState) {
+      this.geoDataService.SelectState(id);
+    } 
+
+    geojson = L.geoJSON(this.geoDataService.SelectedState).addTo(this.map);
+    this.map.fitBounds(geojson.getBounds());
+
+    // --------- DOWNLOAD STATIONS --------- //
+    this.httpService.GetStations(id).subscribe(stations => this.SetStations(stations));
   }
+
+  private SetStations(stations: Array<IStation>) {
+
+    stations.forEach(station => {
+      var marker = L.marker([+station.gegrLat, +station.gegrLon]).addTo(this.map);
+    });
+
+  }
+
+
 
 }

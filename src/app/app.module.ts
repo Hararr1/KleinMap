@@ -13,17 +13,7 @@ import { SettingsComponent } from './services/settings/settings.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
 import { AlarmComponent } from './alarm/alarm.component';
 import { StateMapComponent } from './state-map/state-map.component';
-import { Routes, RouterModule } from '@angular/router';
-
-const routes: Routes = [
-  { path: '', component: MapComponent },
-  { path: 'map', component: MapComponent },
-  { path: 'settings', component: SettingsComponent },
-  { path: 'analytics', component: AnalyticsComponent },
-  { path: 'alarm', component: AlarmComponent },
-  { path: 'state/:id', component: StateMapComponent},
-
-];
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -40,7 +30,7 @@ const routes: Routes = [
     BrowserModule,
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    RouterModule.forRoot(routes)
+    HttpClientModule
   ],
   providers: [GlobalBehaviorService],
   bootstrap: [AppComponent]
