@@ -5,10 +5,15 @@
   </div>
 
   <div class="bodyContainer">
-    <router-outlet></router-outlet>
+    <router-outlet *ngIf="GeoDataService.FeatureCollection; else Loading"></router-outlet>
   </div>
 
   <div class="footerContainer">
     <app-footer></app-footer>
   </div>
+
 </div>
+
+<ng-template #Loading>
+  <div class="loader"></div>
+</ng-template>

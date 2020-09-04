@@ -13,22 +13,22 @@ export class GlobalBehaviorService {
   public ChangeSelectedMenu(menu: Menu) {
 
     switch (menu) {
-      
+
       case Menu.Alarm:
         this.router.navigate(['/alarm']);
         break;
-      
+
       case Menu.Analytics:
         this.router.navigate(['/analytics']);
         break;
-      
+
       case Menu.Map:
         this.router.navigate(['/map']);
         break;
-      
+
       case Menu.Settings:
         this.router.navigate(['/settings']);
-          break;
+        break;
 
     }
 

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { GlobalBehaviorService } from './services/global-behavior.service';
-import { Menu } from './enums/Menu';
+import { GeoDataService } from './services/geo-data.service';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +8,5 @@ import { Menu } from './enums/Menu';
 })
 export class AppComponent {
 
-  public Menu = Menu;
-  constructor(public GlobalBehaviorService: GlobalBehaviorService) {}
+  constructor(public GeoDataService: GeoDataService) {}
 }
