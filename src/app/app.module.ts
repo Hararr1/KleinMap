@@ -14,6 +14,7 @@ import { AnalyticsComponent } from './analytics/analytics.component';
 import { AlarmComponent } from './alarm/alarm.component';
 import { StateMapComponent } from './state-map/state-map.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpService } from './services/http.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     HttpClientModule
   ],
-  providers: [GlobalBehaviorService],
+  providers: [GlobalBehaviorService, HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

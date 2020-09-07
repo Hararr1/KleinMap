@@ -1,9 +1,10 @@
+import { DataService } from './../services/data.service';
 import { State } from './../enums/State';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as L from 'leaflet';
 import { GeoDataService } from '../services/geo-data.service';
 import { ActivatedRoute } from '@angular/router';
-import { HttpService } from '../services/http.service';
+import { IProvince } from '../models/IProvince';
 import { IStation } from '../models/IStation';
 
 @Component({
@@ -11,7 +12,7 @@ import { IStation } from '../models/IStation';
   templateUrl: './state-map.component.html',
   styleUrls: ['./state-map.component.scss']
 })
-export class StateMapComponent implements OnInit {
+export class StateMapComponent implements OnInit, OnDestroy {
 
   private map;
   private unknownIcon;
@@ -21,17 +22,28 @@ export class StateMapComponent implements OnInit {
   private warningIcon;
   private nonFatalIcon;
   private fatalIcon;
+  private selectedId: number;
+  private mapMarkers: Array<any> = [];
 
   constructor(
     public geoDataService: GeoDataService,
-    private route: ActivatedRoute,
-    private httpService: HttpService) { }
+    private dataServive: DataService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.selectedId = +this.route.snapshot.paramMap.get('id');
+    this.SetIcon();
+    this.InitMap(this.selectedId);
 
-    const id = +this.route.snapshot.paramMap.get('id');
-    let geojson;
+    this.dataServive.DataEmmiter.subscribe((prov: Array<IStation>) => this.UpdateMarkers(prov));
+    this.dataServive.StartProvinceDataLoop(this.selectedId);
+  }
 
+  ngOnDestroy(): void {
+    this.dataServive.StopProvinceDataLoop();
+  }
+
+  private InitMap(id: number) {
     // --------- INIT MAP --------- //
     this.map = L.map('mapid', {
       center: [52.431563, 18.565166],
@@ -40,47 +52,32 @@ export class StateMapComponent implements OnInit {
       worldCopyJump: true
     });
 
-    this.SetIcon();
-    // --------- EVENT ON HOVER --------- //
-    function OnHover(e) {
-      const layer = e.target;
-
-      layer.setStyle({
-        weight: 5,
-        color: "#3388ff",
-        dashArray: "",
-        fillOpacity: 0.7
-      });
-
-      if (!L.Browser.ie && !L.Browser.edge) {
-        layer.bringToFront();
-      }
-    }
-
     // --------- GEOJSON --------- //
     if (!this.geoDataService.SelectedState) {
       this.geoDataService.SelectState(id);
     }
 
-    geojson = L.geoJSON(this.geoDataService.SelectedState).addTo(this.map);
+    const geojson = L.geoJSON(this.geoDataService.SelectedState).addTo(this.map);
     this.map.fitBounds(geojson.getBounds());
-
-    // --------- DOWNLOAD STATIONS --------- //
-    this.httpService.GetStations(id).subscribe(stations => this.SetStations(stations));
   }
 
-  private SetStations(stations: Array<IStation>) {
-    console.log(stations.length);
-    console.log(stations);
-    stations.forEach(station => {
-     let marker = L.marker([+station.gegrLat, +station.gegrLon],
-        {
-          zIndexOffset: station.state as number,
-          icon: this.GetIcon(station.state)
-        }).addTo(this.map);
-    });
-  }
+  private UpdateMarkers(province: Array<IStation>) {
+    if (province) {
+      this.mapMarkers.forEach(marker => this.map.removeLayer(marker));
+      console.log(province);
 
+      province.forEach(station => {
+        const marker = L.marker([+station.gegrLat, +station.gegrLon],
+          {
+            zIndexOffset: station.state as number,
+            icon: this.GetIcon(station.state)
+          }).addTo(this.map);
+
+        this.mapMarkers.push(marker);
+      });
+
+    }
+  }
 
   private GetIcon(state: State) {
     let icon;

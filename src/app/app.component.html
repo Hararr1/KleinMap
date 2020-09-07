@@ -4,8 +4,9 @@
     <app-header></app-header>
   </div>
 
-  <div class="bodyContainer">
-    <router-outlet *ngIf="GeoDataService.FeatureCollection; else Loading"></router-outlet>
+  <div class="bodyContainer"
+    *ngIf="GeoDataService.FeatureCollection.features.length > 0; else Loading">
+    <router-outlet></router-outlet>
   </div>
 
   <div class="footerContainer">
