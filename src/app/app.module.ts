@@ -15,6 +15,7 @@ import { AlarmComponent } from './alarm/alarm.component';
 import { StateMapComponent } from './state-map/state-map.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpService } from './services/http.service';
+import { StateTableComponent } from './state-map/state-table/state-table.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HttpService } from './services/http.service';
     SettingsComponent,
     AnalyticsComponent,
     AlarmComponent,
-    StateMapComponent
+    StateMapComponent,
+    StateTableComponent
   ],
   imports: [
     BrowserModule,

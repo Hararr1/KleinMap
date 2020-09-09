@@ -4,7 +4,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as L from 'leaflet';
 import { GeoDataService } from '../services/geo-data.service';
 import { ActivatedRoute } from '@angular/router';
-import { IProvince } from '../models/IProvince';
 import { IStation } from '../models/IStation';
 
 @Component({
@@ -24,6 +23,7 @@ export class StateMapComponent implements OnInit, OnDestroy {
   private fatalIcon;
   private selectedId: number;
   private mapMarkers: Array<any> = [];
+  public Stations: Array<IStation> = [];
 
   constructor(
     public geoDataService: GeoDataService,
@@ -63,8 +63,8 @@ export class StateMapComponent implements OnInit, OnDestroy {
 
   private UpdateMarkers(province: Array<IStation>) {
     if (province) {
+      this.Stations = province;
       this.mapMarkers.forEach(marker => this.map.removeLayer(marker));
-      console.log(province);
 
       province.forEach(station => {
         const marker = L.marker([+station.gegrLat, +station.gegrLon],
