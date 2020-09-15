@@ -15,37 +15,41 @@
 
 .headerContainer {
     grid-row: 1/1;
-    grid-column: 2/12;
+    grid-column: 1/12;
     margin: 15px 15px 2px 15px;
 }
  
 .bodyContainer {
     grid-row: 2/12;
-    grid-column: 2/12;
+    grid-column: 1/12;
     margin: 0px 0px 2px 0px;
     background-color: $contentBackgroundColor;
 }
 
 .footerContainer {
-    grid-row: 12/13;
-    grid-column: 2/12;
+    grid-row: 2/12;
+    grid-column: 12/13;
     background-color: $primaryButton;
 }
 
-@media screen and (min-width: 801px) {
+@media screen and (max-width: 801px) {
 
     .headerContainer {
-        grid-column: 2/13;
+        grid-column: 1/13;
     }
      
     .bodyContainer {
-        grid-column: 1/12;
+        grid-column: 1/13;
         margin: 0 2px 0 0;
     }
     
     .footerContainer {
-        grid-row: 2/12;
-        grid-column: 12/13;
+        grid-row: 12/13;
+        grid-column: 1/13;
+    }
+
+    .mainContainer {
+        padding: 0;
     }
 }
 

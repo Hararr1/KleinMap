@@ -2,23 +2,35 @@
     <thead>
         <tr>
             <th>Name</th>
-            <th>NO2</th>
-            <th>PM10</th>
-            <th>PM25</th>
-            <th>O3</th>
-            <th>CO</th>
-            <th>CC6H6</th>
+            <th>NO<sub>2</sub></th>
+            <th>PM<sub>10</sub></th>
+            <th>PM<sub>25</sub></th>
+            <th>O<sub>3</sub></th>
+            <th>CO<sub>2</sub></th>
+            <th>C<sub>6</sub>H<sub>6</sub></th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let station of Stations">
-            <td>{{ station.city.name }}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td> {{station.stationName}}</td>
+            <td>
+                <div class="tableMarker marker {{ GetState(ParamType.NO2, station?.sensors) }}"></div>
+            </td>
+            <td>
+                <div class="tableMarker marker {{ GetState(ParamType.PM10, station?.sensors) }}"></div>
+            </td>
+            <td>
+                <div class="tableMarker marker {{ GetState(ParamType.PM25, station?.sensors) }}"></div>
+            </td>
+            <td>
+                <div class="tableMarker marker {{ GetState(ParamType.O3, station?.sensors) }}"></div>
+            </td>
+            <td>
+                <div class="tableMarker marker {{ GetState(ParamType.CO, station?.sensors) }}"></div>
+            </td>
+            <td>
+                <div class="tableMarker marker {{ GetState(ParamType.C6H6, station?.sensors) }}"></div>
+            </td>
         </tr>
     </tbody>
 </table>

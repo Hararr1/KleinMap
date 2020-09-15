@@ -1,6 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 @import "./app/styles/colors.scss";
 
+body {
+    margin: 0;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+    background-color: $contentBackgroundColor;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: $primaryButton;
+}
+
 .loader {
     border: 16px solid $loaderBackgroundColor; 
     border-top: 16px solid $primaryButton;
@@ -21,17 +34,20 @@
     100% { transform: rotate(360deg); }
   }
 
+  .mapMarker {
+    left: -8px;
+    position: absolute;
+    top: -5px;
+  }
+
   .marker {
     background: black;
     border-radius: 50%;
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
-    height: 5px !important;
-    width: 5px !important;
+    height: 5px;
+    width: 5px;
     transform: scale(1);
     animation: pulse-black 2s infinite;
-    left: -8px;
-    position: absolute;
-    top: -5px;
   }
 
 @keyframes pulse-black {

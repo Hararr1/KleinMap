@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { HttpService } from './http.service';
 import { Injectable, EventEmitter } from '@angular/core';
 import { IProvince } from '../models/IProvince';
@@ -17,7 +18,7 @@ export class DataService {
 
   public StartAllDataLoop() {
     this.GetData();
-    this.allInterval = setInterval(() => this.GetData(), 5000);
+    this.allInterval = setInterval(() => this.GetData(), environment.interval);
   }
 
   public Update() {
@@ -47,7 +48,7 @@ export class DataService {
 
   public StartProvinceDataLoop(id: number) {
     this.GetDataInProvince(id);
-    this.provinceInterval = setInterval(() => this.GetDataInProvince(id), 5000);
+    this.provinceInterval = setInterval(() => this.GetDataInProvince(id), environment.interval);
   }
 
   public StopProvinceDataLoop() {

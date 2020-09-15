@@ -124,43 +124,43 @@ export class StateMapComponent implements OnInit, OnDestroy {
     this.unknownIcon = L.divIcon({
       iconSize: [1, 1],
       iconAnchor: [5, 28],
-      html: '<div class="marker Unknown"></div>'
+      html: '<div class="mapMarker marker Unknown"></div>'
     });
 
     this.veryGoodIcon = L.divIcon({
       iconSize: [1, 1],
       iconAnchor: [5, 28],
-      html: '<div class="marker VeryGood"></div>'
+      html: '<div class="mapMarker marker VeryGood"></div>'
     });
 
     this.goodIcon = L.divIcon({
       iconSize: [1, 1],
       iconAnchor: [5, 28],
-      html: '<div class="marker Good"></div>'
+      html: '<div class="mapMarker marker Good"></div>'
     });
 
     this.okIcon = L.divIcon({
       iconSize: [1, 1],
       iconAnchor: [5, 28],
-      html: '<div class="marker OK"></div>'
+      html: '<div class="mapMarker marker OK"></div>'
     });
 
     this.warningIcon = L.divIcon({
       iconSize: [1, 1],
       iconAnchor: [5, 28],
-      html: '<div class="marker Warning"></div>'
+      html: '<div class="mapMarker marker Warning"></div>'
     });
 
     this.nonFatalIcon = L.divIcon({
       iconSize: [1, 1],
       iconAnchor: [5, 28],
-      html: '<div class="marker NonFatal"></div>'
+      html: '<div class="mapMarker marker NonFatal"></div>'
     });
 
     this.fatalIcon = L.divIcon({
       iconSize: [1, 1],
       iconAnchor: [0, 0],
-      html: '<div class="marker Fatal"></div>'
+      html: '<div class="mapMarker marker Fatal"></div>'
     });
 
   }

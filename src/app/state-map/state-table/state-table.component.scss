@@ -1,14 +1,62 @@
 .state-table {
-    width: 100%;
-    padding: 10px;
-    margin: 7px -5px;
-    background-color: #323C50;
+    max-width: 507px;
+    height: 100%;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border: solid 1px black;
 }
 
-.state-table thead {
+.state-table thead th{
     font-size: large;
+    position: sticky;
+    top: 0;
+    background-color: #323C50;
+    color: #00A8E8;
+    height: 55px;
+    width: 60px;
+    z-index: 2;
 }
 
 .state-table tbody {
     font-size: small;
+    text-align: center;
+}
+
+.state-table tbody tr {
+    height: 50px;
+}
+
+.state-table tbody tr:hover {
+    color: #00A8E8;
+    box-shadow: #00A8E8 0 1px;
+    cursor: pointer;
+  }
+
+/* Background-color of the odd rows */
+.state-table tbody tr:nth-child(odd) {
+    background-color: #323C50;
+}
+
+/* Background-color of the even rows */
+.state-table tbody tr:nth-child(even) {
+    background-color: #2C3446;
+}
+
+.tableMarker {
+    margin: 0 auto;
+    height: 20px;
+    width: 20px;
+    border: none;
+    animation: unset;
+}
+
+@media screen and (max-width: 801px) {
+    .state-table thead th {
+        font-size: small;
+    }
+
+    .state-table tbody {
+        font-size: x-small;
+    }
 }
