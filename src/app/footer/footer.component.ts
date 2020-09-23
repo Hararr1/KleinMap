@@ -10,7 +10,8 @@ import { Menu } from '../enums/Menu';
 export class FooterComponent implements OnInit {
 
   public Menu = Menu;
-  constructor(public GlobalBehavourService: GlobalBehaviorService) { }
+  public SelectedMenu: Menu;
+  constructor(public GlobalBehaviorService: GlobalBehaviorService) { }
 
   ngOnInit(): void {
   }

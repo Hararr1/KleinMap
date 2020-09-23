@@ -1,7 +1,7 @@
-<div id="mapid" style="float: left; width: calc(100% - 507px);">
+<div [style.display]="GlobalBehaviorService.SelectedView !== View.Table ? 'inline': 'none'" id="mapid" style="float: left;">
 
 </div>
 
-<div style="float: left; height: 100%;">
+<div [style.display]="GlobalBehaviorService.SelectedView !== View.Map ? 'inline': 'none'" style="float: left; height: 100%;">
     <app-state-table [Stations]="Stations"></app-state-table>
 </div>

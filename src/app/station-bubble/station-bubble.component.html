@@ -1,0 +1,56 @@
+<div class="stationBubble">
+    <table>
+        <tr>
+            <td class="left">City: </td>
+            <td class="right">{{ Station.city.name }}</td>
+        </tr>
+        <tr>
+            <td class="left">Name: </td>
+            <td class="right">{{ Station.stationName | slice:0:27}}</td>
+        </tr>
+        <tr>
+            <td class="left">Last update: </td>
+            <td class="right">{{ Station.lastUpdate | date:"dd/MM/yyyy HH:mm" }}</td>
+        </tr>
+    </table>
+
+    <table> 
+        <tr *ngIf="IconHelper.GetValue(ParamType.NO2, Station?.sensors) !== 0">
+            <td class="left">NO<sub>2</sub> :</td>
+            <td class="right" [style.color]="IconHelper.GetColor(ParamType.NO2, Station?.sensors) | safeStyle">
+                {{ IconHelper.GetValue(ParamType.NO2, Station?.sensors) }}
+            </td>
+        </tr>
+        <tr *ngIf="IconHelper.GetValue(ParamType.PM10, Station?.sensors) !== 0">
+            <td class="left">PM<sub>10</sub> :</td>
+            <td class="right" [style.color]="IconHelper.GetColor(ParamType.PM10, Station?.sensors) | safeStyle">
+                {{ IconHelper.GetValue(ParamType.PM10, Station?.sensors) }}
+            </td>
+        </tr>
+        <tr *ngIf="IconHelper.GetValue(ParamType.PM25, Station?.sensors) !== 0">
+            <td class="left">PM<sub>25</sub> :</td>
+            <td class="right" [style.color]="IconHelper.GetColor(ParamType.PM25, Station?.sensors) | safeStyle">
+                {{ IconHelper.GetValue(ParamType.PM25, Station?.sensors) }}
+            </td>
+        </tr>
+        <tr *ngIf="IconHelper.GetValue(ParamType.O3, Station?.sensors) !== 0">
+            <td class="left">O<sub>3</sub> :</td>
+            <td class="right" [style.color]="IconHelper.GetColor(ParamType.O3, Station?.sensors) | safeStyle">
+                {{ IconHelper.GetValue(ParamType.O3, Station?.sensors) }}
+            </td>
+        </tr>
+        <tr *ngIf="IconHelper.GetValue(ParamType.CO, Station?.sensors) !== 0">
+            <td class="left">CO<sub>2</sub> :</td>
+            <td class="right" [style.color]="IconHelper.GetColor(ParamType.CO, Station?.sensors) | safeStyle">
+                {{ IconHelper.GetValue(ParamType.CO, Station?.sensors) }}
+            </td>
+        </tr>
+        <tr *ngIf="IconHelper.GetValue(ParamType.C6H6, Station?.sensors) !== 0">
+            <td class="left">C<sub>6</sub>H<sub>6</sub> :</td>
+            <td class="right" [style.color]="IconHelper.GetColor(ParamType.C6H6, Station?.sensors) | safeStyle">
+                {{ IconHelper.GetValue(ParamType.C6H6, Station?.sensors) }}
+            </td>
+        </tr>
+    </table>
+
+</div>

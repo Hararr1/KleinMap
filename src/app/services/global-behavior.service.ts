@@ -1,16 +1,25 @@
-import { Injectable } from '@angular/core';
+import { ICoordinates } from './../models/ICoordinates';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Menu } from '../enums/Menu';
 import { Router } from '@angular/router';
+import { View } from '../enums/View';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class GlobalBehaviorService {
+  public SelectedMenu: Menu;
+  public SelectedView: View = View.None;
+  public FromMapEvent = new EventEmitter<ICoordinates>();
+  public FromTableEvent = new EventEmitter<ICoordinates>();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+  }
 
   public ChangeSelectedMenu(menu: Menu) {
+    this.SelectedMenu = menu;
+
 
     switch (menu) {
 
@@ -32,5 +41,17 @@ export class GlobalBehaviorService {
 
     }
 
+  }
+
+  public ChangeSelectedView(view: View) {
+    this.SelectedView = view;
+  }
+
+  public HoverOnMap(coordinates: ICoordinates) {
+    this.FromMapEvent.emit(coordinates);
+  }
+
+  public HoverOnTable(coordinates: ICoordinates) {
+    this.FromTableEvent.emit(coordinates);
   }
 }

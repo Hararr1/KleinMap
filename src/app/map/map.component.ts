@@ -96,9 +96,9 @@ export class MapComponent implements OnInit, OnDestroy {
     const findedProvince = this.dataService.Provinces.find(province => province.id == e.target.feature.id);
 
     if (findedProvince) {
-      const max = Math.max(...findedProvince.stations.map((o) => o.state));
+      const state =findedProvince.stations[0].provinceState;
 
-      switch (max) {
+      switch (state) {
         case 0:
           colour = '#bfbfbf';
           break;

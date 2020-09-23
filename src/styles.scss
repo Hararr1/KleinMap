@@ -1,6 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import "./app/styles/colors.scss";
 
+button {
+    height: 4vh;
+    width: 6vh;
+    border: none;
+    outline: none;
+}
+
 body {
     margin: 0;
 }
@@ -11,12 +18,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: $primaryButton;
+    background-color: $backgroundColor;
 }
 
 .loader {
     border: 16px solid $loaderBackgroundColor; 
-    border-top: 16px solid $primaryButton;
+    border-top: 16px solid $primaryCollor;
     border-radius: 50%;
     width: 120px;
     height: 120px;
@@ -38,6 +45,11 @@ body {
     left: -8px;
     position: absolute;
     top: -5px;
+  }
+
+  p {
+      font-size: 1rem;
+      font-weight: bold;
   }
 
   .marker {
@@ -240,4 +252,27 @@ body {
         transform: scale(0.95);
         box-shadow: 0 0 0 0 rgba(255, 82, 82, 0);
     }
+}
+
+.leaflet-popup-content {
+    width: 300px;
+    max-height: 190px;
+}
+
+.leaflet-popup-content-wrapper {
+    background-color: transparent;
+    box-shadow: none;
+    color: white;
+}
+
+.leaflet-popup-close-button {
+    display: none;
+}
+
+.leaflet-popup-tip-container {
+    display: none;
+}
+
+.leaflet-popup  leaflet-zoom-animated {
+    bottom: 10px;
 }

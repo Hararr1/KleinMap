@@ -1,53 +1,59 @@
+@import "../styles/colors.scss";
+
 .container {
     margin: 0 auto;
+    padding: 10px;
 }
 
 .alarm {
     background: url("../../assets/alarm.webp");
-    background-size: 32px;
+    background-size: 23px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .analytics {
     background: url("../../assets/analytics.webp");
-    background-size: 32px;
+    background-size: 23px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .map {
     background: url("../../assets/map.webp");
-    background-size: 32px;
+    background-size: 23px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .settings{
     background: url("../../assets/settings.webp");
-    background-size: 32px;
+    background-size: 23px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 button {
-    height: 8vh;
-    border: none;
-    outline: none;
-    box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.7);
+    border-bottom: 2px solid white;
 }
 
 button:hover {
     cursor: pointer;
     background-color: #4c4c4c61;
+    border-bottom: 2px solid white;
+}
+
+button:focus {
+    border-bottom: 2px solid $primaryCollor;
 }
 
 @media only screen and (max-width: 800px)
 {
+
     button {
         width: 12.5vw;
         margin-bottom: 2px;
-        margin-right: 18px;
+        margin-right: 50px;
         display: inline-block;
     }
 
@@ -60,19 +66,24 @@ button:hover {
     }
 
     .settings {
-        margin-right: 0px;
+        margin-right: 7px;
     }
 }
 
 @media only screen and (min-width: 801px)
 {
+    .container {
+        display: flex;
+        position: absolute;
+        right: 0;
+        bottom: 0px;
+    }
+
    button {
-        width: 8.32vw;
-        margin: 0 auto;
-        display: block;
+        margin: 0 10px;
    }
 
-   .alarm {
-       margin-left: 0;
+   .settings {
+        margin-right: 0;
    }
 }

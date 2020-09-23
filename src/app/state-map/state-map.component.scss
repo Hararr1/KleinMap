@@ -2,6 +2,12 @@
 
 #mapid {
     height: 100%;
-    width: 100%;
     background:transparent;
+    width: calc(100% - 507px);
+}
+
+@media screen and (max-width: 801px) {
+    #mapid {
+        width: 100%;
+    }
 }

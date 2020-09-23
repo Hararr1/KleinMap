@@ -1,0 +1,37 @@
+.stationBubble {
+    box-shadow: 0 0px 5px #4685eb;
+    width: 100%;
+    background-color: #01171f;
+    padding:10px;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+}
+
+table {
+    padding: 5px;
+    margin: 5px auto;
+}
+
+table tr .left {
+    float: left;
+    text-align: right;
+    width: 90px;
+    padding:3px;
+}
+
+table tr .right {
+    float: right;
+    text-align: left;
+    width: 160px;
+    padding:3px;
+    white-space: nowrap;
+}
+
+.tableMarker {
+    margin: 0 auto;
+    height: 20px;
+    width: 20px;
+    border: none;
+    animation: unset;
+}

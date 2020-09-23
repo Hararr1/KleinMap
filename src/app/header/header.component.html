@@ -1,4 +1,9 @@
-<div class="container">
-    <div class="rectangle"></div>
+<div class="container" (window:resize)="ResizeWindow($event)">
     <h1>KleinApp</h1>
+    <button [style.display]="GlobalBehaviorService.SelectedView === View.Table && GlobalBehaviorService.SelectedMenu === Menu.StateMap ? 'inline': 'none'"
+        (click)="GlobalBehaviorService.ChangeSelectedView(View.Map)" class="switchMap">
+    </button>
+    <button [style.display]="GlobalBehaviorService.SelectedView === View.Map && GlobalBehaviorService.SelectedMenu === Menu.StateMap? 'inline': 'none'"
+        (click)="GlobalBehaviorService.ChangeSelectedView(View.Table)" class="tableData">
+    </button>
 </div>

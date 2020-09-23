@@ -11,5 +11,6 @@ export interface IStation {
   addressStreet?: string;
   sensors: Array<ISensor>;
   state: State;
+  provinceState: State;
   lastUpdate: string;
 }

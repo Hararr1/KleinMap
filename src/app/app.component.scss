@@ -8,28 +8,32 @@
    box-sizing: border-box; 
    grid-template-rows: repeat(12, 1fr);
    grid-template-columns: repeat(12, 1fr);
-   background: linear-gradient(113deg, rgb(17, 21, 17) 0%, rgb(54, 69, 74) 47%, rgb(119, 119, 119) 99%);
+   background: linear-gradient(165deg, #000000 0%, #304951 47%, #77b7b7 99%);
    color: $fontColor;
    padding: 20px;
 }
 
 .headerContainer {
     grid-row: 1/1;
-    grid-column: 1/12;
+    grid-column: 1/4;
     margin: 15px 15px 2px 15px;
 }
  
 .bodyContainer {
     grid-row: 2/12;
-    grid-column: 1/12;
-    margin: 0px 0px 2px 0px;
+    grid-column: 1/13;
     background-color: $contentBackgroundColor;
+    border: 1px solid black;
+    box-shadow: 15px 10px 35px black;
 }
 
 .footerContainer {
-    grid-row: 2/12;
-    grid-column: 12/13;
-    background-color: $primaryButton;
+    grid-row: 1/1;
+    grid-column: 8/13;
+    position: relative;
+    // background-color: $backgroundColor;
+    // border: 1px solid black;
+    // box-shadow: 15px 10px 35px black;
 }
 
 @media screen and (max-width: 801px) {
@@ -46,6 +50,9 @@
     .footerContainer {
         grid-row: 12/13;
         grid-column: 1/13;
+        background-color: #00171F;
+        border: 1px solid black;
+        box-shadow: 15px 10px 35px black;
     }
 
     .mainContainer {

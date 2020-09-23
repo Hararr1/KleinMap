@@ -8,28 +8,35 @@
             <th>O<sub>3</sub></th>
             <th>CO<sub>2</sub></th>
             <th>C<sub>6</sub>H<sub>6</sub></th>
+            <th>Details</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let station of Stations">
+        <tr *ngFor="let station of Stations" 
+            (mouseenter)="StationHover(station)"
+            [style.background]="SelectedStation === station ? '#44686b' : '' | safeStyle">
+            
             <td> {{station.stationName}}</td>
             <td>
-                <div class="tableMarker marker {{ GetState(ParamType.NO2, station?.sensors) }}"></div>
+                <div class="tableMarker marker {{ IconHelper.GetState(ParamType.NO2, station?.sensors) }}"></div>
             </td>
             <td>
-                <div class="tableMarker marker {{ GetState(ParamType.PM10, station?.sensors) }}"></div>
+                <div class="tableMarker marker {{ IconHelper.GetState(ParamType.PM10, station?.sensors) }}"></div>
             </td>
             <td>
-                <div class="tableMarker marker {{ GetState(ParamType.PM25, station?.sensors) }}"></div>
+                <div class="tableMarker marker {{ IconHelper.GetState(ParamType.PM25, station?.sensors) }}"></div>
             </td>
             <td>
-                <div class="tableMarker marker {{ GetState(ParamType.O3, station?.sensors) }}"></div>
+                <div class="tableMarker marker {{ IconHelper.GetState(ParamType.O3, station?.sensors) }}"></div>
             </td>
             <td>
-                <div class="tableMarker marker {{ GetState(ParamType.CO, station?.sensors) }}"></div>
+                <div class="tableMarker marker {{ IconHelper.GetState(ParamType.CO, station?.sensors) }}"></div>
             </td>
             <td>
-                <div class="tableMarker marker {{ GetState(ParamType.C6H6, station?.sensors) }}"></div>
+                <div class="tableMarker marker {{ IconHelper.GetState(ParamType.C6H6, station?.sensors) }}"></div>
+            </td>
+            <td>
+                <button class="show"></button>
             </td>
         </tr>
     </tbody>

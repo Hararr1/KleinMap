@@ -16,6 +16,8 @@ import { StateMapComponent } from './state-map/state-map.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpService } from './services/http.service';
 import { StateTableComponent } from './state-map/state-table/state-table.component';
+import { StationBubbleComponent } from './station-bubble/station-bubble.component';
+import { SafeStylePipe } from './pipes/SafeStyle';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { StateTableComponent } from './state-map/state-table/state-table.compone
     AnalyticsComponent,
     AlarmComponent,
     StateMapComponent,
-    StateTableComponent
+    StateTableComponent,
+    StationBubbleComponent,
+    SafeStylePipe
   ],
   imports: [
     BrowserModule,

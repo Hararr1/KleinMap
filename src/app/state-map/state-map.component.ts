@@ -1,10 +1,15 @@
+import { ICoordinates } from './../models/ICoordinates';
+import { StationBubbleComponent } from './../station-bubble/station-bubble.component';
+import { GlobalBehaviorService } from './../services/global-behavior.service';
 import { DataService } from './../services/data.service';
 import { State } from './../enums/State';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ComponentFactoryResolver, Injector } from '@angular/core';
 import * as L from 'leaflet';
 import { GeoDataService } from '../services/geo-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { IStation } from '../models/IStation';
+import { View } from '../enums/View';
+import { Menu } from '../enums/Menu';
 
 @Component({
   selector: 'app-state-map',
@@ -14,29 +19,27 @@ import { IStation } from '../models/IStation';
 export class StateMapComponent implements OnInit, OnDestroy {
 
   private map;
-  private unknownIcon;
-  private veryGoodIcon;
-  private goodIcon;
-  private okIcon;
-  private warningIcon;
-  private nonFatalIcon;
-  private fatalIcon;
   private selectedId: number;
   private mapMarkers: Array<any> = [];
   public Stations: Array<IStation> = [];
+  public View = View;
 
   constructor(
     public geoDataService: GeoDataService,
     private dataServive: DataService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    public GlobalBehaviorService: GlobalBehaviorService,
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private injector: Injector) { }
 
   ngOnInit() {
+    this.GlobalBehaviorService.SelectedMenu = Menu.StateMap;
     this.selectedId = +this.route.snapshot.paramMap.get('id');
-    this.SetIcon();
     this.InitMap(this.selectedId);
 
     this.dataServive.DataEmmiter.subscribe((prov: Array<IStation>) => this.UpdateMarkers(prov));
     this.dataServive.StartProvinceDataLoop(this.selectedId);
+    this.GlobalBehaviorService.FromTableEvent.subscribe((coords: ICoordinates) => this.HoverStation(coords))
   }
 
   ngOnDestroy(): void {
@@ -70,8 +73,27 @@ export class StateMapComponent implements OnInit, OnDestroy {
         const marker = L.marker([+station.gegrLat, +station.gegrLon],
           {
             zIndexOffset: station.state as number,
-            icon: this.GetIcon(station.state)
-          }).addTo(this.map);
+            icon: this.GetIcon(station.state, station.city.name)
+          }).addTo(this.map)
+          .bindPopup(this.CreateCustomPopup(station));
+
+        // Zdarzenia
+        // marker.on('mouseover', () => {
+        //   marker.openPopup();
+        //   this.map.setView(marker.getLatLng(), 11);
+        // });
+
+        marker.on('click', () => {
+          marker.openPopup();
+          this.map.setView(marker.getLatLng(), 9);
+        });
+
+        marker.on('mouseover', () => {
+          const coordinates: ICoordinates = marker.getLatLng();
+          this.map.setView(coordinates, 9);
+
+          this.GlobalBehaviorService.HoverOnMap(coordinates);
+        });
 
         this.mapMarkers.push(marker);
       });
@@ -79,90 +101,108 @@ export class StateMapComponent implements OnInit, OnDestroy {
     }
   }
 
-  private GetIcon(state: State) {
+  private GetIcon(state: State, name: string) {
     let icon;
 
     switch (state) {
       case State.Unknown:
-        icon = this.unknownIcon;
+        icon = L.divIcon({
+          iconSize: [1, 1],
+          iconAnchor: [5, 28],
+          html: `<div class="mapMarker marker Unknown"></div><p>${name}<p/>`
+        });
         break;
 
       case State.VeryGood:
-        icon = this.veryGoodIcon;
+        icon = L.divIcon({
+          iconSize: [1, 1],
+          iconAnchor: [5, 28],
+          html: `<div class="mapMarker marker VeryGood"></div><p>${name}<p/>`
+        });
         break;
 
       case State.Good:
-        icon = this.goodIcon;
+        icon = L.divIcon({
+          iconSize: [1, 1],
+          iconAnchor: [5, 28],
+          html: `<div class="mapMarker marker Good"></div><p>${name}<p/>`
+        });
         break;
 
       case State.OK:
-        icon = this.okIcon;
+        icon = L.divIcon({
+          iconSize: [1, 1],
+          iconAnchor: [5, 28],
+          html: `<div class="mapMarker marker OK"></div><p>${name}<p/>`
+        });
         break;
 
       case State.Warning:
-        icon = this.warningIcon;
+        icon = L.divIcon({
+          iconSize: [1, 1],
+          iconAnchor: [5, 28],
+          html: `<div class="mapMarker marker Warning"></div><p>${name}<p/>`
+        });
         break;
 
       case State.NonFatal:
-        icon = this.nonFatalIcon;
+        icon = L.divIcon({
+          iconSize: [1, 1],
+          iconAnchor: [5, 28],
+          html: `<div class="mapMarker marker NonFatal"></div><p>${name}<p/>`
+        });
         break;
 
       case State.Fatal:
-        icon = this.fatalIcon;
+        icon = L.divIcon({
+          iconSize: [1, 1],
+          iconAnchor: [0, 0],
+          html: `<div class="mapMarker marker Fatal"></div><p>${name}<p/>`
+        });
         break;
 
       default:
-        icon = this.unknownIcon;
+        icon = L.divIcon({
+          iconSize: [1, 1],
+          iconAnchor: [5, 28],
+          html: `<div class="mapMarker marker Unknown"></div><p>${name}<p/>`
+        });
         break;
     }
 
     return icon;
   }
 
-  private SetIcon() {
+  private CreateCustomPopup(station: IStation) {
 
-    this.unknownIcon = L.divIcon({
-      iconSize: [1, 1],
-      iconAnchor: [5, 28],
-      html: '<div class="mapMarker marker Unknown"></div>'
+    const factory = this.componentFactoryResolver.resolveComponentFactory(
+      StationBubbleComponent
+    );
+
+    const component = factory.create(this.injector);
+
+    // Inputs:
+    component.instance.Station = station;
+
+    // Manually invoke change detection
+    component.changeDetectorRef.detectChanges();
+
+    return component.location.nativeElement;
+
+  }
+
+  private HoverStation(coords: ICoordinates) {
+    const findedMarker = this.mapMarkers.find(marker => {
+      let coordinates = new Object() as ICoordinates;
+      coordinates = marker.getLatLng();
+
+      if (coordinates.lat === coords.lat && coordinates.lng === coords.lng) {
+        return marker;
+      }
     });
 
-    this.veryGoodIcon = L.divIcon({
-      iconSize: [1, 1],
-      iconAnchor: [5, 28],
-      html: '<div class="mapMarker marker VeryGood"></div>'
-    });
-
-    this.goodIcon = L.divIcon({
-      iconSize: [1, 1],
-      iconAnchor: [5, 28],
-      html: '<div class="mapMarker marker Good"></div>'
-    });
-
-    this.okIcon = L.divIcon({
-      iconSize: [1, 1],
-      iconAnchor: [5, 28],
-      html: '<div class="mapMarker marker OK"></div>'
-    });
-
-    this.warningIcon = L.divIcon({
-      iconSize: [1, 1],
-      iconAnchor: [5, 28],
-      html: '<div class="mapMarker marker Warning"></div>'
-    });
-
-    this.nonFatalIcon = L.divIcon({
-      iconSize: [1, 1],
-      iconAnchor: [5, 28],
-      html: '<div class="mapMarker marker NonFatal"></div>'
-    });
-
-    this.fatalIcon = L.divIcon({
-      iconSize: [1, 1],
-      iconAnchor: [0, 0],
-      html: '<div class="mapMarker marker Fatal"></div>'
-    });
-
+    findedMarker.openPopup();
+    this.map.setView(findedMarker.getLatLng(), 9);
   }
 
 }

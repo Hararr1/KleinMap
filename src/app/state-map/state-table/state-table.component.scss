@@ -1,18 +1,30 @@
+@import "../../styles/colors.scss";
+
+.show {
+    background: url("../../../assets/show.webp");
+    background-size: 23px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.show:hover {
+    cursor: pointer;
+}
+
 .state-table {
     max-width: 507px;
     height: 100%;
     display: block;
     overflow-x: hidden;
     overflow-y: scroll;
-    border: solid 1px black;
 }
 
 .state-table thead th{
     font-size: large;
     position: sticky;
     top: 0;
-    background-color: #323C50;
-    color: #00A8E8;
+    background-color: $stateTable;
+    color: $primaryCollor;
     height: 55px;
     width: 60px;
     z-index: 2;
@@ -28,14 +40,14 @@
 }
 
 .state-table tbody tr:hover {
-    color: #00A8E8;
-    box-shadow: #00A8E8 0 1px;
+    // color: $primaryCollor;
+    // box-shadow: $primaryCollor 0 1px;
     cursor: pointer;
   }
 
 /* Background-color of the odd rows */
 .state-table tbody tr:nth-child(odd) {
-    background-color: #323C50;
+    background-color: $stateTable;
 }
 
 /* Background-color of the even rows */

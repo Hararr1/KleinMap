@@ -5,17 +5,39 @@
 }
 
 h1 {
-    font-size: 3em;
+    font-size: 2em;
     margin-bottom: 0;
 }
 
 
 .rectangle {
-    background-color: $primaryButton;
+    background-color: $primaryCollor;
     width: 0.8vh;
     float: left;
     margin-top: 6px;
     margin-right: 2px;
+}
+
+.switchMap {
+    background: url("../../assets/switchMap.webp");
+    background-size: 35px;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    right: 10px;
+    top: 21px;
+    height: 6vh;
+}
+
+.tableData {
+    background: url("../../assets/tableData.webp");
+    background-size: 35px;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    right: 10px;
+    top: 21px;
+    height: 6vh;
 }
 
 @media only screen and (max-width: 800px)
@@ -29,10 +51,25 @@ h1 {
         height: 2.5vh ;
     }
   
+    .switchMap {
+        display: inline;
+    }
+
+    .tableData {
+        display: inline;
+    }
 }
 
 @media only screen and (min-width: 801px) {
     .rectangle {
         height: 4.5vh;
+    }
+
+    .switchMap {
+        display: none !important;
+    }
+
+    .tableData {
+        display: none !important;
     }
 }

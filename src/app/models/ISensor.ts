@@ -12,4 +12,5 @@ export interface ISensor {
     type: ParamType;
     state: State;
     worstValue: number;
+    currentValue: number;
 }
