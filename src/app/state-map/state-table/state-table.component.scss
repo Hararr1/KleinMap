@@ -75,6 +75,10 @@ input { border-style: none; background: transparent; outline: none; }
     z-index: 2;
 }
 
+.state-table thead th:hover {
+  cursor: pointer;
+}
+
 .state-table tbody {
     font-size: small;
     text-align: center;

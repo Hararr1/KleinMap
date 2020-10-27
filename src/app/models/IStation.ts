@@ -13,4 +13,5 @@ export interface IStation {
   state: State;
   provinceState: State;
   lastUpdate: string;
+  isShow: boolean;
 }

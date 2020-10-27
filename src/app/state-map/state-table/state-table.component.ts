@@ -1,3 +1,4 @@
+import { SearchTextPipe } from './../../pipes/search-text.pipe';
 import { DataService } from './../../services/data.service';
 import { ICoordinates } from './../../models/ICoordinates';
 import { GlobalBehaviorService } from './../../services/global-behavior.service';
@@ -18,7 +19,7 @@ export class StateTableComponent implements OnInit {
   public ParamType = ParamType;
   public IconHelper: ColorHelper = new ColorHelper();
   public DataService = DataService;
-  constructor(private globalBehaviorService: GlobalBehaviorService, private dataService: DataService) { }
+  constructor(private globalBehaviorService: GlobalBehaviorService, private searchTextPipe: SearchTextPipe) { }
 
   ngOnInit(): void {
     this.globalBehaviorService.FromMapHoverEvent.subscribe((coordinates: ICoordinates) => this.HoverStation(coordinates));
@@ -38,6 +39,11 @@ export class StateTableComponent implements OnInit {
     coordinates.lng = +station.gegrLon;
 
     this.globalBehaviorService.HoverOnTable(coordinates);
+  }
+
+  public FilterStations() {
+    this.searchTextPipe.transform(DataService.Stations, this.globalBehaviorService.FilterValue);
+    DataService.Stations = [...DataService.Stations];
   }
 
 }

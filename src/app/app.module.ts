@@ -43,7 +43,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [GlobalBehaviorService, HttpService],
+  providers: [GlobalBehaviorService, HttpService, SearchTextPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

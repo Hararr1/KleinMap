@@ -10,6 +10,13 @@ import { IStation } from '../models/IStation';
 export class DataService {
 
   public static Stations: Array<IStation> = [];
+  public static IsEnabledNO2 = false;
+  public static IsEnabledPM10 = false;
+  public static IsEnabledPM25 = false;
+  public static IsEnabled03 = false;
+  public static IsEnabledCO2 = true;
+  public static IsEnabledC6H6 = true;
+
   public Provinces: Array<IProvince> = [];
   private allInterval;
   public DataEmmiter: EventEmitter<Array<IStation>> = new EventEmitter();

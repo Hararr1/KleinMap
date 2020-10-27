@@ -6,12 +6,30 @@
     <thead>
         <tr>
             <th>Name</th>
-            <th>NO<sub>2</sub></th>
-            <th>PM<sub>10</sub></th>
-            <th>PM<sub>25</sub></th>
-            <th>O<sub>3</sub></th>
-            <th>CO<sub>2</sub></th>
-            <th>C<sub>6</sub>H<sub>6</sub></th>
+            <th [style.background-color]="DataService.IsEnabledNO2? '': 'grey'" 
+                (click)="DataService.IsEnabledNO2 = !DataService.IsEnabledNO2" 
+                (click)="FilterStations()" >NO<sub>2</sub>
+            </th>
+            <th [style.background-color]="DataService.IsEnabledPM10? '': 'grey'" 
+                (click)="DataService.IsEnabledPM10 = !DataService.IsEnabledPM10" 
+                (click)="FilterStations()" >PM<sub>10</sub>
+            </th>
+            <th [style.background-color]="DataService.IsEnabledPM25? '': 'grey'" 
+                (click)="DataService.IsEnabledPM25 = !DataService.IsEnabledPM25" 
+                (click)="FilterStations()" >PM<sub>25</sub>
+            </th>
+            <th [style.background-color]="DataService.IsEnabled03? '': 'grey'" 
+                (click)="DataService.IsEnabled03 = !DataService.IsEnabled03" 
+                (click)="FilterStations()" >O<sub>3</sub>
+            </th>
+            <th [style.background-color]="DataService.IsEnabledCO2? '': 'grey'" 
+                (click)="DataService.IsEnabledCO2 = !DataService.IsEnabledCO2" 
+                (click)="FilterStations()">CO<sub>2</sub>
+            </th>
+            <th [style.background-color]="DataService.IsEnabledC6H6? '': 'grey'" 
+                (click)="DataService.IsEnabledC6H6 = !DataService.IsEnabledC6H6" 
+                (click)="FilterStations()">C<sub>6</sub>H<sub>6</sub>
+            </th>
             <th>Details</th>
         </tr>
     </thead>
