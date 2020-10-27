@@ -57,6 +57,10 @@ export class StateMapComponent implements OnInit, OnDestroy {
       worldCopyJump: true
     });
 
+    this.map.on('click', () => {
+      this.selectedMarker = undefined;
+    });
+
     // --------- GEOJSON --------- //
     if (!this.geoDataService.SelectedState) {
       this.geoDataService.SelectState(id);
@@ -141,7 +145,6 @@ export class StateMapComponent implements OnInit, OnDestroy {
 
           this.mapMarkers.push(marker);
         }
-
       });
 
     }
