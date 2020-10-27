@@ -8,7 +8,7 @@
    box-sizing: border-box; 
    grid-template-rows: repeat(12, 1fr);
    grid-template-columns: repeat(12, 1fr);
-   background: linear-gradient(165deg, #000000 0%, #304951 47%, #77b7b7 99%);
+   background: linear-gradient(165deg, #000000 0%, #1a68a0 47%, #1a6879 99%);
    color: $fontColor;
    padding: 20px;
 }
@@ -20,11 +20,11 @@
 }
  
 .bodyContainer {
-    grid-row: 2/12;
+    grid-row: 2/13;
     grid-column: 1/13;
     background-color: $contentBackgroundColor;
-    border: 1px solid black;
-    box-shadow: 15px 10px 35px black;
+    box-shadow: 4px 4px 2px #000000a1;
+    border-radius: 10px;
 }
 
 .footerContainer {

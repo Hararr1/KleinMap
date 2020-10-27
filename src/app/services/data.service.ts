@@ -9,6 +9,7 @@ import { IStation } from '../models/IStation';
 })
 export class DataService {
 
+  public static Stations: Array<IStation> = [];
   public Provinces: Array<IProvince> = [];
   private allInterval;
   public DataEmmiter: EventEmitter<Array<IStation>> = new EventEmitter();
@@ -58,6 +59,7 @@ export class DataService {
   private GetDataInProvince(id: number) {
     this.httpService.GetStations(id).toPromise().then(stations => {
       this.DataEmmiter.emit(stations);
+      DataService.Stations = stations;
     });
   }
 

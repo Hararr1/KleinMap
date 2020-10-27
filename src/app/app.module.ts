@@ -18,6 +18,8 @@ import { HttpService } from './services/http.service';
 import { StateTableComponent } from './state-map/state-table/state-table.component';
 import { StationBubbleComponent } from './station-bubble/station-bubble.component';
 import { SafeStylePipe } from './pipes/SafeStyle';
+import { SearchTextPipe } from './pipes/search-text.pipe';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,13 +33,15 @@ import { SafeStylePipe } from './pipes/SafeStyle';
     StateMapComponent,
     StateTableComponent,
     StationBubbleComponent,
-    SafeStylePipe
+    SafeStylePipe,
+    SearchTextPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [GlobalBehaviorService, HttpService],
   bootstrap: [AppComponent]

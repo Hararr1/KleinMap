@@ -21,6 +21,7 @@ export class StateMapComponent implements OnInit, OnDestroy {
   private map;
   private selectedId: number;
   private mapMarkers: Array<any> = [];
+  private selectedMarker: any;
   public Stations: Array<IStation> = [];
   public View = View;
 
@@ -39,7 +40,8 @@ export class StateMapComponent implements OnInit, OnDestroy {
 
     this.dataServive.DataEmmiter.subscribe((prov: Array<IStation>) => this.UpdateMarkers(prov));
     this.dataServive.StartProvinceDataLoop(this.selectedId);
-    this.GlobalBehaviorService.FromTableEvent.subscribe((coords: ICoordinates) => this.HoverStation(coords))
+    this.GlobalBehaviorService.FromTableHoverEvent.subscribe((coords: ICoordinates) => this.HoverStation(coords));
+    this.GlobalBehaviorService.FromTableSearchEvent.subscribe((stations: Array<IStation>) => this.UpdateMarkers(stations));
   }
 
   ngOnDestroy(): void {
@@ -66,36 +68,80 @@ export class StateMapComponent implements OnInit, OnDestroy {
 
   private UpdateMarkers(province: Array<IStation>) {
     if (province) {
+
       this.Stations = province;
-      this.mapMarkers.forEach(marker => this.map.removeLayer(marker));
+
+      // -------------- REMOVED -------------- //
+      const markersToRemoved: any[] = [];
+
+      this.mapMarkers.forEach(marker => {
+        let coordinates = new Object() as ICoordinates;
+        coordinates = marker.getLatLng();
+
+        const markerToRemove = province.find(station =>
+          +station.gegrLat === coordinates.lat &&
+          +station.gegrLon === coordinates.lng);
+
+        if (markerToRemove === undefined || markerToRemove === null) {
+          markersToRemoved.push(marker);
+        }
+      });
+
+      if (markersToRemoved) {
+        markersToRemoved.forEach(marker => {
+          const index = this.mapMarkers.indexOf(marker);
+          this.map.removeLayer(marker);
+          this.mapMarkers.splice(index, 1);
+        });
+      }
 
       province.forEach(station => {
-        const marker = L.marker([+station.gegrLat, +station.gegrLon],
-          {
-            zIndexOffset: station.state as number,
-            icon: this.GetIcon(station.state, station.city.name)
-          }).addTo(this.map)
-          .bindPopup(this.CreateCustomPopup(station));
+        const searchedMarker = this.mapMarkers.find(m => {
+          let coordinates = new Object() as ICoordinates;
+          coordinates = m.getLatLng();
 
-        // Zdarzenia
-        // marker.on('mouseover', () => {
-        //   marker.openPopup();
-        //   this.map.setView(marker.getLatLng(), 11);
-        // });
+          if (+station.gegrLat === coordinates.lat &&
+            +station.gegrLon === coordinates.lng) {
+            return m;
+          }
+        }
+        );
 
-        marker.on('click', () => {
-          marker.openPopup();
-          this.map.setView(marker.getLatLng(), 9);
-        });
+        // -------------- UPDATE -------------- //
+        if (searchedMarker) {
+          searchedMarker.setIcon(this.GetIcon(station.state, station.city.name));
 
-        marker.on('mouseover', () => {
-          const coordinates: ICoordinates = marker.getLatLng();
-          this.map.setView(coordinates, 9);
+          if (this.selectedMarker) {
+            let searchedCoordinates = new Object() as ICoordinates;
+            searchedCoordinates = searchedMarker.getLatLng();
 
-          this.GlobalBehaviorService.HoverOnMap(coordinates);
-        });
+            let selectedCoordinates = new Object() as ICoordinates;
+            selectedCoordinates = this.selectedMarker.getLatLng();
 
-        this.mapMarkers.push(marker);
+            if (searchedCoordinates.lat === selectedCoordinates.lat &&
+              searchedCoordinates.lng === selectedCoordinates.lng) {
+              this.selectedMarker.openPopup();
+            }
+          }
+
+        } else {
+          // -------------- ADD -------------- //
+          const marker = L.marker([+station.gegrLat, +station.gegrLon],
+            {
+              zIndexOffset: station.state as number,
+              icon: this.GetIcon(station.state, station.city.name)
+            }).addTo(this.map)
+            .bindPopup(this.CreateCustomPopup(station));
+
+          marker.on('click', () => {
+            marker.openPopup();
+            this.selectedMarker = marker;
+            this.map.setView(marker.getLatLng(), 9);
+          });
+
+          this.mapMarkers.push(marker);
+        }
+
       });
 
     }
@@ -188,7 +234,6 @@ export class StateMapComponent implements OnInit, OnDestroy {
     component.changeDetectorRef.detectChanges();
 
     return component.location.nativeElement;
-
   }
 
   private HoverStation(coords: ICoordinates) {
@@ -201,7 +246,11 @@ export class StateMapComponent implements OnInit, OnDestroy {
       }
     });
 
-    findedMarker.openPopup();
+    if (this.selectedMarker) {
+      this.selectedMarker.closePopup();
+      this.selectedMarker = undefined;
+    }
+
     this.map.setView(findedMarker.getLatLng(), 9);
   }
 

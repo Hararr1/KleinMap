@@ -1,3 +1,7 @@
+<div class="webflow-style-input">
+    <input [(ngModel)]="filterValue" placeholder="Search station">
+</div>
+
 <table class="state-table">
     <thead>
         <tr>
@@ -12,7 +16,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let station of Stations" 
+        <tr *ngFor="let station of DataService?.Stations | searchText: filterValue"  
             (mouseenter)="StationHover(station)"
             [style.background]="SelectedStation === station ? '#44686b' : '' | safeStyle">
             

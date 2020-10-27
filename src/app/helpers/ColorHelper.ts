@@ -73,9 +73,6 @@ export class ColorHelper {
                     break;
             }
         }
-
-        console.log(color);
         return color;
-
     }
 }

@@ -1,10 +1,9 @@
+import { DataService } from './../../services/data.service';
 import { ICoordinates } from './../../models/ICoordinates';
 import { GlobalBehaviorService } from './../../services/global-behavior.service';
-import { State } from './../../enums/State';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IStation } from 'src/app/models/IStation';
 import { ParamType } from 'src/app/enums/ParamType';
-import { ISensor } from 'src/app/models/ISensor';
 import { ColorHelper } from 'src/app/helpers/ColorHelper';
 
 @Component({
@@ -14,22 +13,24 @@ import { ColorHelper } from 'src/app/helpers/ColorHelper';
 })
 export class StateTableComponent implements OnInit {
 
-  @Input() Stations: Array<IStation>;
+  public filterValue: string = '';
   public SelectedStation: IStation;
   public ParamType = ParamType;
   public IconHelper: ColorHelper = new ColorHelper();
-  constructor(private globalBehaviorService: GlobalBehaviorService) { }
+  public DataService = DataService;
+  constructor(private globalBehaviorService: GlobalBehaviorService, private dataService: DataService) { }
 
   ngOnInit(): void {
-    this.globalBehaviorService.FromMapEvent.subscribe((coordinates: ICoordinates) => this.HoverStation(coordinates));
+    this.globalBehaviorService.FromMapHoverEvent.subscribe((coordinates: ICoordinates) => this.HoverStation(coordinates));
   }
-  
+
   private HoverStation(coordinates: ICoordinates) {
-    this.SelectedStation = this.Stations.find(station => +station.gegrLat === coordinates.lat && +station.gegrLon === coordinates.lng);
+    this.SelectedStation = this.DataService.Stations
+      .find(station => +station.gegrLat === coordinates.lat && +station.gegrLon === coordinates.lng);
   }
 
   public StationHover(station: IStation) {
-  
+
     this.SelectedStation = station;
 
     const coordinates = new Object () as ICoordinates;

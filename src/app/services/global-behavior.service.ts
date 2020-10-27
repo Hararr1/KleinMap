@@ -3,6 +3,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { Menu } from '../enums/Menu';
 import { Router } from '@angular/router';
 import { View } from '../enums/View';
+import { IStation } from '../models/IStation';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,10 @@ import { View } from '../enums/View';
 export class GlobalBehaviorService {
   public SelectedMenu: Menu;
   public SelectedView: View = View.None;
-  public FromMapEvent = new EventEmitter<ICoordinates>();
-  public FromTableEvent = new EventEmitter<ICoordinates>();
+  public FromMapHoverEvent = new EventEmitter<ICoordinates>();
+  public FromTableHoverEvent = new EventEmitter<ICoordinates>();
+  public FromTableSearchEvent = new EventEmitter<Array<IStation>>();
+  public FilterValue = '';
 
   constructor(private router: Router) {
   }
@@ -48,10 +51,14 @@ export class GlobalBehaviorService {
   }
 
   public HoverOnMap(coordinates: ICoordinates) {
-    this.FromMapEvent.emit(coordinates);
+    this.FromMapHoverEvent.emit(coordinates);
   }
 
   public HoverOnTable(coordinates: ICoordinates) {
-    this.FromTableEvent.emit(coordinates);
+    this.FromTableHoverEvent.emit(coordinates);
+  }
+  
+  public SearchOnTable(stations: Array<IStation>) {
+    this.FromTableSearchEvent.emit(stations);
   }
 }
