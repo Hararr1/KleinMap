@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MapComponent } from './map/map.component';
-import { SettingsComponent } from './services/settings/settings.component';
-import { AnalyticsComponent } from './analytics/analytics.component';
-import { AlarmComponent } from './alarm/alarm.component';
-import { StateMapComponent } from './state-map/state-map.component';
-
+import { AlarmComponent } from './Views/alarm/alarm.component';
+import { AnalyticsComponent } from './Views/analytics/analytics.component';
+import { MapComponent } from './Views/map/map.component';
+import { StateMapComponent } from './Views/province/state-map/state-map.component';
+import { SettingsComponent } from './Views/settings/settings.component';
 
 const routes: Routes = [
   { path: '', component: MapComponent },

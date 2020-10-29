@@ -1,7 +1,7 @@
-import { SearchTextPipe } from './../../pipes/search-text.pipe';
-import { DataService } from './../../services/data.service';
-import { ICoordinates } from './../../models/ICoordinates';
-import { GlobalBehaviorService } from './../../services/global-behavior.service';
+import { SearchTextPipe } from '../../../pipes/search-text.pipe';
+import { DataService } from '../../../services/data.service';
+import { ICoordinates } from '../../../models/ICoordinates';
+import { GlobalBehaviorService } from '../../../services/global-behavior.service';
 import { Component, OnInit } from '@angular/core';
 import { IStation } from 'src/app/models/IStation';
 import { ParamType } from 'src/app/enums/ParamType';
@@ -19,18 +19,22 @@ export class StateTableComponent implements OnInit {
   public ParamType = ParamType;
   public IconHelper: ColorHelper = new ColorHelper();
   public DataService = DataService;
-  constructor(private globalBehaviorService: GlobalBehaviorService, private searchTextPipe: SearchTextPipe) { }
+
+  constructor(
+    private globalBehaviorService: GlobalBehaviorService,
+    private searchTextPipe: SearchTextPipe) { }
 
   ngOnInit(): void {
     this.globalBehaviorService.FromMapHoverEvent.subscribe((coordinates: ICoordinates) => this.HoverStation(coordinates));
   }
 
   private HoverStation(coordinates: ICoordinates) {
+    console.log(coordinates);
     this.SelectedStation = this.DataService.Stations
       .find(station => +station.gegrLat === coordinates.lat && +station.gegrLon === coordinates.lng);
   }
 
-  public StationHover(station: IStation) {
+  public ShowStationBubble(station: IStation) {
 
     this.SelectedStation = station;
 
@@ -38,7 +42,7 @@ export class StateTableComponent implements OnInit {
     coordinates.lat = +station.gegrLat;
     coordinates.lng = +station.gegrLon;
 
-    this.globalBehaviorService.HoverOnTable(coordinates);
+    this.globalBehaviorService.ClickOnTable(coordinates);
   }
 
   public FilterStations() {

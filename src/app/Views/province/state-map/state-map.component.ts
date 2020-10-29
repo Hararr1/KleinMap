@@ -1,15 +1,15 @@
-import { ICoordinates } from './../models/ICoordinates';
-import { StationBubbleComponent } from './../station-bubble/station-bubble.component';
-import { GlobalBehaviorService } from './../services/global-behavior.service';
-import { DataService } from './../services/data.service';
-import { State } from './../enums/State';
+import { ICoordinates } from '../.././../models/ICoordinates';
+import { StationBubbleComponent } from '../../station-bubble/station-bubble.component';
+import { GlobalBehaviorService } from '../../../services/global-behavior.service';
+import { DataService } from '../../../services/data.service';
+import { State } from '../../../enums/State';
 import { Component, OnInit, OnDestroy, ComponentFactoryResolver, Injector } from '@angular/core';
 import * as L from 'leaflet';
-import { GeoDataService } from '../services/geo-data.service';
+import { GeoDataService } from '../../../services/geo-data.service';
 import { ActivatedRoute } from '@angular/router';
-import { IStation } from '../models/IStation';
-import { View } from '../enums/View';
-import { Menu } from '../enums/Menu';
+import { IStation } from '../../../models/IStation';
+import { View } from '../../../enums/View';
+import { Menu } from '../../../enums/Menu';
 
 @Component({
   selector: 'app-state-map',
@@ -141,6 +141,10 @@ export class StateMapComponent implements OnInit, OnDestroy {
             marker.openPopup();
             this.selectedMarker = marker;
             this.map.setView(marker.getLatLng(), 9);
+
+            let selectedCoordinates = new Object() as ICoordinates;
+            selectedCoordinates = marker.getLatLng();
+            this.GlobalBehaviorService.HoverOnMap(selectedCoordinates);
           });
 
           this.mapMarkers.push(marker);

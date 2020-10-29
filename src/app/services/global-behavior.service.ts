@@ -54,7 +54,7 @@ export class GlobalBehaviorService {
     this.FromMapHoverEvent.emit(coordinates);
   }
 
-  public HoverOnTable(coordinates: ICoordinates) {
+  public ClickOnTable(coordinates: ICoordinates) {
     this.FromTableHoverEvent.emit(coordinates);
   }
   

@@ -1,7 +1,7 @@
 
 import { DataService } from './../services/data.service';
 import { GlobalBehaviorService } from './../services/global-behavior.service';
-import { Pipe, PipeTransform, ɵConsole } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 import { IStation } from '../models/IStation';
 import { ParamType } from '../enums/ParamType';
 

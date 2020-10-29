@@ -1,7 +1,8 @@
-import { GlobalBehaviorService } from './../services/global-behavior.service';
+import { GlobalBehaviorService } from './../../services/global-behavior.service';
 import { Component, OnInit } from '@angular/core';
-import { View } from '../enums/View';
-import { Menu } from '../enums/Menu';
+import { Menu } from 'src/app/enums/Menu';
+import { View } from 'src/app/enums/View';
+
 
 @Component({
   selector: 'app-header',

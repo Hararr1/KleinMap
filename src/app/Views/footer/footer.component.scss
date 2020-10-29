@@ -1,4 +1,4 @@
-@import "../styles/colors.scss";
+@import "../../styles/colors.scss";
 
 .container {
     margin: 0 auto;
@@ -6,28 +6,28 @@
 }
 
 .alarm {
-    background: url("../../assets/alarm.webp");
+    background: url("../../../assets/alarm.webp");
     background-size: 23px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .analytics {
-    background: url("../../assets/analytics.webp");
+    background: url("../../../assets/analytics.webp");
     background-size: 23px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .map {
-    background: url("../../assets/map.webp");
+    background: url("../../../assets/map.webp");
     background-size: 23px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .settings{
-    background: url("../../assets/settings.webp");
+    background: url("../../../assets/settings.webp");
     background-size: 23px;
     background-repeat: no-repeat;
     background-position: center;

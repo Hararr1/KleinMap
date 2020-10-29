@@ -1,4 +1,4 @@
-@import "../../styles/colors.scss";
+@import "../../../styles/colors.scss";
 // colors
 $input-background: rgba(57, 63, 84, 0.8);
 $input-text-inactive: #7881A1;
@@ -46,12 +46,12 @@ input { border-style: none; background: transparent; outline: none; }
   }
 
 .show {
-    background: url("../../../assets/show.webp");
+    background: url("../../../../assets/show.webp");
     background-size: 23px;
     background-repeat: no-repeat;
     background-position: center;
 }
-
+ 
 .show:hover {
     cursor: pointer;
 }

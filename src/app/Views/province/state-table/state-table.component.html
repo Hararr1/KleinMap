@@ -35,8 +35,8 @@
     </thead>
     <tbody>
         <tr *ngFor="let station of DataService?.Stations | searchText: filterValue"  
-            (mouseenter)="StationHover(station)"
-            [style.background]="SelectedStation === station ? '#44686b' : '' | safeStyle">
+            (click)="ShowStationBubble(station)"
+            [style.background]="SelectedStation?.id === station?.id ? '#44686b' : '' | safeStyle">
             
             <td> {{station.stationName}}</td>
             <td>

@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ParamType } from '../enums/ParamType';
-import { State } from '../enums/State';
-import { ColorHelper } from '../helpers/ColorHelper';
-import { IStation } from '../models/IStation';
+import { ParamType } from 'src/app/enums/ParamType';
+import { ColorHelper } from 'src/app/helpers/ColorHelper';
+import { IStation } from 'src/app/models/IStation';
 
 @Component({
   selector: 'app-station-bubble',

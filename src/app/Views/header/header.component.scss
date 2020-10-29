@@ -1,4 +1,4 @@
-@import "../styles/colors.scss";
+@import "../../styles/colors.scss";
 
 .container {
     margin-bottom: 5px;
@@ -19,7 +19,7 @@ h1 {
 }
 
 .switchMap {
-    background: url("../../assets/switchMap.webp");
+    background: url("../../../assets/switchMap.webp");
     background-size: 35px;
     background-repeat: no-repeat;
     background-position: center;
@@ -30,7 +30,7 @@ h1 {
 }
 
 .tableData {
-    background: url("../../assets/tableData.webp");
+    background: url("../../../assets/tableData.webp");
     background-size: 35px;
     background-repeat: no-repeat;
     background-position: center;

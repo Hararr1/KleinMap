@@ -1,7 +1,7 @@
-import { DataService } from './../services/data.service';
+import { DataService } from '../../services/data.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as L from 'leaflet';
-import { GeoDataService } from '../services/geo-data.service';
+import { GeoDataService } from '../../services/geo-data.service';
 
 @Component({
   selector: 'app-map',
