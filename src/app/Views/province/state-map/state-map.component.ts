@@ -19,9 +19,9 @@ import { Menu } from '../../../enums/Menu';
 export class StateMapComponent implements OnInit, OnDestroy {
 
   private map;
-  private selectedId: number;
   private mapMarkers: Array<any> = [];
   private selectedMarker: any;
+  public selectedId: number;
   public Stations: Array<IStation> = [];
   public View = View;
 

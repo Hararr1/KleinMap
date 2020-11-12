@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ParamType } from 'src/app/enums/ParamType';
-import { ColorHelper } from 'src/app/helpers/ColorHelper';
+import { SensorStateHelper } from 'src/app/helpers/SensorStateHelper';
 import { IStation } from 'src/app/models/IStation';
 
 @Component({
@@ -11,7 +11,7 @@ import { IStation } from 'src/app/models/IStation';
 export class StationBubbleComponent implements OnInit {
 
   @Input() Station: IStation;
-  public IconHelper: ColorHelper = new ColorHelper();
+  public SensorStateHelper =  SensorStateHelper;
   public ParamType = ParamType;
 
   constructor() { }

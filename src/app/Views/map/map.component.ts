@@ -1,5 +1,5 @@
 import { DataService } from '../../services/data.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { GeoDataService } from '../../services/geo-data.service';
 
@@ -7,20 +7,14 @@ import { GeoDataService } from '../../services/geo-data.service';
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
-  providers: [DataService]
 })
-export class MapComponent implements OnInit, OnDestroy {
+export class MapComponent implements OnInit {
   constructor(
     private geoDataService: GeoDataService,
     private dataService: DataService) { }
 
   ngOnInit() {
-    this.dataService.StartAllDataLoop();
     this.InitMap();
-  }
-
-  ngOnDestroy(): void {
-    this.dataService.StopAllDataLoop();
   }
 
   // --------- INIT MAP METHODS --------- //

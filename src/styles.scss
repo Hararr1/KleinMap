@@ -8,8 +8,22 @@ button {
     outline: none;
 }
 
+@font-face {
+    font-family: "Monda-Bold";
+    src: url("./assets/fonts/Monda-Bold.ttf");
+  }
+  @font-face {
+    font-family: "Monda-Light";
+    src: url("./assets/fonts/Monda-Light.ttf");
+  }
+  @font-face {
+    font-family: "Monda-Regular";
+    src: url("./assets/fonts/Monda-Regular.ttf");
+  }
+
 body {
     margin: 0;
+    font-family: 'Monda-Regular';
 }
 
 ::-webkit-scrollbar {

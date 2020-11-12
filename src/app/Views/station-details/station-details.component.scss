@@ -1,0 +1,87 @@
+.stationDetails {
+    min-width: 240px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 1.7rem;
+    text-align: center;
+    color: #0096FF;
+    margin: 10px auto;
+}
+
+h2 {
+    font-size: 1.5rem;
+    text-align: center;
+    color: #0096FF;
+    margin: 10px auto;
+}
+
+h3 {
+    text-align: center;
+}
+
+table {
+    margin: 0 auto;
+}
+
+.stationTable tr td{
+    padding: 4px;
+    font-size: 1.2rem;
+}
+
+tr td:nth-child(1) {
+    text-align: right;
+} 
+
+tr td:nth-child(2) {
+    text-align: left;  
+} 
+
+.sensorTable {
+    border: 1px solid black;
+    background: #041723;
+    border-radius: 5px;
+}
+
+.sensorTable tr td {
+    padding: 7px 3px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.sensorTable th {
+    font-size: 1.2rem;
+    background-color: #5fdce6;
+    color: #000000;
+    height: 30px;
+}
+
+
+@media screen and (min-width: 801px) {
+    .stationDetails {
+        max-width: 60vw;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    h2 {
+        font-size: 1rem;
+    }
+
+    .stationTable tr td {
+        font-size: 0.7rem;
+    }
+
+    .sensorTable tr td {
+        font-size: 0.65rem;
+    }
+
+    .sensorTable th {
+        font-size: 0.7rem;
+    }
+}

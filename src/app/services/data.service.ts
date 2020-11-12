@@ -10,12 +10,13 @@ import { IStation } from '../models/IStation';
 export class DataService {
 
   public static Stations: Array<IStation> = [];
-  public static IsEnabledNO2 = false;
-  public static IsEnabledPM10 = false;
-  public static IsEnabledPM25 = false;
-  public static IsEnabled03 = false;
+  public static IsEnabledNO2 = true;
+  public static IsEnabledPM10 = true;
+  public static IsEnabledPM25 = true;
+  public static IsEnabled03 = true;
   public static IsEnabledCO2 = true;
   public static IsEnabledC6H6 = true;
+  public static IsEnabledSO2 = true;
 
   public Provinces: Array<IProvince> = [];
   private allInterval;
@@ -38,7 +39,6 @@ export class DataService {
   }
 
   private GetData() {
-    let newProvinces: Array<IProvince> = [];
 
     for (let i = 1; i <= 16; i++) {
       this.httpService.GetStations(i)
@@ -47,11 +47,18 @@ export class DataService {
           province.id = i;
           province.stations = stations;
 
-          newProvinces.push(province);
+          const findedIndex = this.Provinces.findIndex(p => p.id === province.id);
+
+          if (findedIndex !== -1) {
+            this.Provinces[findedIndex].stations = stations;
+          } else {
+            this.Provinces.push(province);
+          }
         });
     }
 
-    this.Provinces = newProvinces;
+    // TODO JAKIŚ UPDATE A NIE PRZYPISANIE NOWYCH DANYCH
+    // this.Provinces = newProvinces;
   }
 
   public StartProvinceDataLoop(id: number) {

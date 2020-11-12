@@ -65,6 +65,12 @@ export class SearchTextPipe implements PipeTransform {
         }
       }
 
+      if (DataService.IsEnabledSO2) {
+        if (station.sensors.some(sensor => sensor.type === ParamType.SO2)) {
+          output = true;
+        }
+      }
+
       station.isShow = output;
     });
 

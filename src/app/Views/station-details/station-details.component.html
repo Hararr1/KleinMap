@@ -1,0 +1,50 @@
+<div class="stationDetails">
+    <h1>{{ Station?.stationName }}</h1>
+    <table class="stationTable">
+        <tbody>
+            <tr>
+                <td>CITY:</td>
+                <td>{{ Station?.city?.name }}</td>
+            </tr>
+            <tr>
+                <td>LAST UPDATE:</td>
+                <td>{{ Station?.lastUpdate | date: 'medium'}}</td>
+            </tr>
+            <tr>
+                <td>STATE:</td>
+                <td [style.color]="SensorStateHelper.GetColorByState(Station?.state) | safeStyle">
+                    {{ SensorStateHelper.GetDescriptionState(Station?.state) }}
+                </td>
+            </tr>
+            <tr>
+                <td>COORDINATES:</td>
+                <td>{{ Station?.gegrLat | slice:0:7 }}, {{ Station?.gegrLon | slice:0:7 }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>SENSORS</h2>
+
+    <table class="sensorTable">
+        <thead>
+            <th>Type</th>
+            <th>Last Update</th>
+            <th>State</th>
+            <th>Worst</th>
+            <th>Value</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let sensor of Station?.sensors; index as i" >
+                <td [style.color]="SensorStateHelper.GetColorByType(i) | safeStyle">
+                    {{ SensorStateHelper.GetNameState(sensor.type) }}
+                </td>
+                <td>{{ sensor?.lastUpdate | date: 'medium' }}</td>
+                <td [style.color]="SensorStateHelper.GetColorByState(sensor?.state) | safeStyle">
+                    {{ SensorStateHelper.GetDescriptionState(sensor?.state) }}
+                </td>
+                <td>{{ sensor?.worstValue }}</td>
+                <td>{{ sensor?.currentValue }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

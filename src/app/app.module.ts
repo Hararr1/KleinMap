@@ -1,3 +1,4 @@
+import { StationDetailsComponent } from './Views/station-details/station-details.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -33,7 +34,8 @@ import { StationBubbleComponent } from './Views/station-bubble/station-bubble.co
     StateTableComponent,
     StationBubbleComponent,
     SafeStylePipe,
-    SearchTextPipe
+    SearchTextPipe,
+    StationDetailsComponent
   ],
   imports: [
     BrowserModule,
