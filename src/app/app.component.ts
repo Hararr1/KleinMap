@@ -18,7 +18,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.DataService.StartAllDataLoop();
-    console.log("THERE")
   }
   
   ngOnDestroy(): void {
