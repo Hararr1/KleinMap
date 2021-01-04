@@ -20,6 +20,7 @@ import { StateMapComponent } from './Views/province/state-map/state-map.componen
 import { StateTableComponent } from './Views/province/state-table/state-table.component';
 import { SettingsComponent } from './Views/settings/settings.component';
 import { StationBubbleComponent } from './Views/station-bubble/station-bubble.component';
+import { DailyConfirmComponent } from './Views/daily-confirm/daily-confirm.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { StationBubbleComponent } from './Views/station-bubble/station-bubble.co
     StationBubbleComponent,
     SafeStylePipe,
     SearchTextPipe,
-    StationDetailsComponent
+    StationDetailsComponent,
+    DailyConfirmComponent
   ],
   imports: [
     BrowserModule,

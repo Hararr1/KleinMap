@@ -1,1 +1,26 @@
-<p>analytics works!</p>
+<div class="analytics">
+    <h1>Daily information about stations!</h1>
+    <div>
+        <h2>Select provinces</h2>
+        <ul>
+            <li *ngFor="let province of DataService.Provinces" 
+                [style.background]="ArrayHelper.Contains(province, SelectedProvinces)? '#0096ff': 'transparent'"
+                (click)="SelectProvince(province)">{{ province.provinceName }}</li>
+        </ul>
+        <span>Selected provinces: {{ SelectedProvinces.length }}</span>
+    </div>
+    <div class="stations" *ngIf="StationsInProvinces.length > 0">
+        <h2>Select stations</h2>
+        <ul>
+            <li *ngFor="let station of StationsInProvinces"
+                [style.background]="ArrayHelper.Contains(station, SelectedStations)? '#0096ff': 'transparent'"
+                (click)="SelectStation(station)">{{ station.stationName  }} | {{ station.city.commune.provinceName }}</li>
+        </ul>
+        <span>Selected stations: {{ SelectedStations.length }}</span>
+    </div>
+    <div class="userInfo" *ngIf="SelectedStations.length > 0">
+        <h2>Send verify e-mail</h2>
+        <input [(ngModel)]="UserEmail" placeholder="E-mail address">
+        <button [style.background]="IsSended? 'green' : ''" (click)="SendVerifyMessage()">Send</button>
+    </div>
+</div>

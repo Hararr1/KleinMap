@@ -46,6 +46,7 @@ export class DataService {
           const province = new Object() as IProvince;
           province.id = i;
           province.stations = stations;
+          province.provinceName = this.GetProvinceName(i);
 
           const findedIndex = this.Provinces.findIndex(p => p.id === province.id);
 
@@ -75,6 +76,78 @@ export class DataService {
       this.DataEmmiter.emit(stations);
       DataService.Stations = stations;
     });
+  }
+
+  private GetProvinceName(id: number ) {
+    let provinceName = "";
+
+    switch(id) {
+      case 1:
+        provinceName = "Pomorskie";
+        break;
+
+      case 2:
+        provinceName = "Kujawsko-Pomorskie";
+        break;
+
+      case 3:
+        provinceName = "Warmińsko-Mazurskie";
+        break;
+
+      case 4:
+        provinceName = "Zachodniopomorskie";
+        break;
+
+      case 5:
+        provinceName = "Lubuskie";
+        break;
+
+      case 6:
+        provinceName = "Wielkopolskie";
+        break;
+
+      case 7:
+        provinceName = "Mazowieckie";
+        break;
+
+      case 8:
+        provinceName = "Podlaskie";
+        break;
+
+      case 9:
+        provinceName = "Lubelskie";
+        break;
+
+      case 10:
+        provinceName = "Świętokrzyskie";
+        break;
+
+      case 11:
+        provinceName = "Łódzkie";
+        break;
+
+      case 12:
+        provinceName = "Dolnośląskie";
+        break;
+
+      case 13:
+        provinceName = "Opolskie";
+        break;
+
+      case 14:
+        provinceName = "Śląskie";
+        break;
+
+      case 15:
+        provinceName = "Małopolskie";
+        break;
+
+      case 16:
+        provinceName = "Podkarpackie";
+        break;
+    }
+
+    return provinceName;
   }
 
 }

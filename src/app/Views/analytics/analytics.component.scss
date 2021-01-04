@@ -1,0 +1,76 @@
+.analytics {
+    min-width: 240px;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+ul {
+    padding: 0;
+    height: 230px;
+    width: 500px;
+    overflow: auto;
+    background-color: #211d1d45;
+    border-radius: 5px;
+    margin: 0;
+}
+
+ul li {
+    list-style: none;
+    padding: 2px;
+    font-size: 1.1rem;
+    text-align: center;
+    margin: 2px;
+}
+
+ul li:hover {
+    background: radial-gradient(black, transparent) !important;
+    cursor: pointer;
+}
+
+span {
+    float: right;
+}
+
+.stations {
+    display: inline-block;
+}
+
+.userInfo {
+    text-align: center;
+}
+
+input {
+    width: 220px;
+    border: none;
+    height: 25px;
+    border-radius: 3px;
+    outline: none;
+    text-align: center;
+}
+
+button {
+    width: 162px;
+    display: block;
+    margin: 15px auto;
+    border-radius: 3px;
+    background: #0096ff;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    height: 30px;
+    cursor: pointer;
+}
+
+h1 {
+    font-size: 1.7rem;
+    text-align: center;
+    color: #0096FF;
+    margin: 10px auto;
+}
+
+h2 {
+    font-size: 1.4rem;
+    text-align: center;
+    margin: 25px auto 10px auto;
+}
+

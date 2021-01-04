@@ -1,0 +1,17 @@
+<div class="container" [ngSwitch]="ConfirmResult">
+    <div class="loader" *ngSwitchCase="0"></div>
+    <div class="ok" *ngSwitchCase="1">
+        <h1>Verified!</h1>
+        <h2>Your e-mail has been verified.</h2>
+        <button [routerLink]="['/']" routerLinkActive="active" style="background: green;">OK</button>
+    </div>
+    <div class="error" *ngSwitchCase="2">
+        <h1>Something went wrong!</h1>
+        <h2>Please try again later</h2>
+        <button [routerLink]="['/']" routerLinkActive="active" style="background: #ca3c3c;">OK</button>
+    </div>
+</div>
+
+<ng-template #Loading>
+    <div class="loader"></div>
+</ng-template>
