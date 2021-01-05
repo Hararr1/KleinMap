@@ -21,6 +21,7 @@ import { StateTableComponent } from './Views/province/state-table/state-table.co
 import { SettingsComponent } from './Views/settings/settings.component';
 import { StationBubbleComponent } from './Views/station-bubble/station-bubble.component';
 import { DailyConfirmComponent } from './Views/daily-confirm/daily-confirm.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { DailyConfirmComponent } from './Views/daily-confirm/daily-confirm.compo
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ChartsModule
   ],
   providers: [GlobalBehaviorService, HttpService, SearchTextPipe],
   bootstrap: [AppComponent]
