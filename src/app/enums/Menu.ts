@@ -3,5 +3,6 @@ export enum Menu {
     Analytics = 2,
     Map = 3,
     Settings = 4,
-    StateMap = 5
+    ProvinceMap = 5,
+    StationDetails = 6
 }

@@ -34,7 +34,7 @@ export class StateMapComponent implements OnInit, OnDestroy {
     private injector: Injector) { }
 
   ngOnInit() {
-    this.GlobalBehaviorService.SelectedMenu = Menu.StateMap;
+    this.GlobalBehaviorService.SelectedMenu = Menu.ProvinceMap;
     this.selectedId = +this.route.snapshot.paramMap.get('id');
     this.InitMap(this.selectedId);
 

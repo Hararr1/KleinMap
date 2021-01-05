@@ -7,6 +7,8 @@ import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { IData } from 'src/app/models/IParamData';
 import * as ChartZoom from 'chartjs-plugin-zoom';
+import { GlobalBehaviorService } from 'src/app/services/global-behavior.service';
+import { Menu } from 'src/app/enums/Menu';
 
 @Component({
   selector: 'app-station-details',
@@ -16,82 +18,82 @@ import * as ChartZoom from 'chartjs-plugin-zoom';
 })
 export class StationDetailsComponent implements OnInit {
 
- public ChartData: ChartDataSets[] = [];
- public ChartLabels: Label[] = [];
+  public ChartData: ChartDataSets[] = [];
+  public ChartLabels: Label[] = [];
 
-  lineChartOptions = {
-    maintainAspectRatio: false,
-      responsive: true,
-      tooltips: {
-        mode: 'x',
-        intersect: false,
-        enabled: true,
-      },
-      scales: {
-        yAxes: [{
-          type: 'linear',
-          ticks: {
-            beginAtZero: true,
-            fontColor: 'white'
-          },
-          gridLines: {
-            color: '#bee4ff',
-          },
-        }],
-        xAxes: [{
-          type: 'time',
-          time: {
-            unit: 'hours',
-            unitStepSize: 1,
-            displayFormats: {
-              'hours': 'HH:mm:SS'
+  public lineChartOptions = {
+      maintainAspectRatio: false,
+        responsive: true,
+        tooltips: {
+          mode: 'x',
+          intersect: false,
+          enabled: true,
+        },
+        scales: {
+          yAxes: [{
+            type: 'linear',
+            ticks: {
+              beginAtZero: true,
+              fontColor: 'white'
             },
-          },
-          gridLines: {
-            color: '#bee4ff',
-          },
-          ticks: {
-            fontColor: 'white',
-          }
-        }]
-      },
-      plugins: {
-        zoom: {
-          // pan: { // Add only if zoom isn't drag: true
-          //   // Boolean to enable panning
-          //   enabled: true,
-
-          //   // Panning directions. Remove the appropriate direction to disable
-          //   // Eg. 'y' would only allow panning in the y direction
-          //   mode: 'x'
-          // },
+            gridLines: {
+              color: '#bee4ff',
+            },
+          }],
+          xAxes: [{
+            type: 'time',
+            time: {
+              unit: 'hours',
+              unitStepSize: 1,
+              displayFormats: {
+                'hours': 'HH:mm:SS'
+              },
+            },
+            gridLines: {
+              color: '#bee4ff',
+            },
+            ticks: {
+              fontColor: 'white',
+            }
+          }]
+        },
+        plugins: {
           zoom: {
-            enabled: true,
-            drag: true,
-            mode: 'x'
-          },
+            // pan: { // Add only if zoom isn't drag: true
+            //   // Boolean to enable panning
+            //   enabled: true,
 
-          drag: {
-            borderColor: 'rgba(225,225,225,0.3)',
-            borderWidth: 5,
-            backgroundColor: 'rgb(225,225,225)',
-            animationDuration: 0
-          },
-    
-          // Speed of zoom via mouse wheel
-          // (percentage of zoom on a wheel event)
-          speed: 0.5,
-    
-          // Minimal zoom distance required before actually applying zoom
-          threshold: 20,
-    
-          // On category scale, minimal zoom level before actually applying zoom
-          sensitivity: 10,
+            //   // Panning directions. Remove the appropriate direction to disable
+            //   // Eg. 'y' would only allow panning in the y direction
+            //   mode: 'x'
+            // },
+            zoom: {
+              enabled: true,
+              drag: true,
+              mode: 'x'
+            },
+
+            drag: {
+              borderColor: 'rgba(225,225,225,0.3)',
+              borderWidth: 5,
+              backgroundColor: 'rgb(225,225,225)',
+              animationDuration: 0
+            },
+      
+            // Speed of zoom via mouse wheel
+            // (percentage of zoom on a wheel event)
+            speed: 0.5,
+      
+            // Minimal zoom distance required before actually applying zoom
+            threshold: 20,
+      
+            // On category scale, minimal zoom level before actually applying zoom
+            sensitivity: 10,
+          }
         }
-      }
   };
 
-  lineChartColors: Color[] = [
+  public lineChartColors: Color[] = [
     {
       borderColor: 'black',
       backgroundColor: '#7cdbff',
@@ -122,11 +124,12 @@ export class StationDetailsComponent implements OnInit {
     }
   ];
 
-  lineChartLegend = true;
-  lineChartType = 'line';
+  public lineChartLegend = true;
+  public lineChartType = 'line';
+
   public lineChartPlugins = [
     ChartZoom
-    ];
+  ];
   
   public Station: IStation;
   public SensorStateHelper = SensorStateHelper;
@@ -134,9 +137,11 @@ export class StationDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private dataService: DataService,
-    private changeDetector : ChangeDetectorRef) { }
+    private changeDetector : ChangeDetectorRef,
+    private globalBehaviourService: GlobalBehaviorService) { }
 
   ngOnInit(): void {
+    this.globalBehaviourService.ChangeSelectedMenu(Menu.StationDetails);
     const provinceId = +this.route.snapshot.params.idState;
     const stationId = +this.route.snapshot.params.id;
 
@@ -184,7 +189,6 @@ export class StationDetailsComponent implements OnInit {
     }, 200);
 
   }
-
 
   private UpdateChart() {
     this.ChartData = [];
